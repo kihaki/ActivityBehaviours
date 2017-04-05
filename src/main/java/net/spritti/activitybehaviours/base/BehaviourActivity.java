@@ -9,9 +9,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-
 public class BehaviourActivity extends AppCompatActivity {
 	private List<Behaviour> behaviours = new ArrayList<>();
+
+	public void addBehaviourOnTop(@NonNull Behaviour... behaviour) {
+		behaviours.addAll(0, Arrays.asList(behaviour));
+	}
 
 	public void addBehaviour(@NonNull Behaviour... behaviour) {
 		behaviours.addAll(Arrays.asList(behaviour));
