@@ -19,6 +19,7 @@ public class SetupDrawerToggleBehaviour extends SimpleBehaviour {
 	private final            int drawerGravity;
 	@StringRes private final int openDrawerContentDescRes;
 	@StringRes private final int closeDrawerContentDescRes;
+	private ActionBarDrawerToggle drawerToggle;
 
 	SetupDrawerToggleBehaviour(
 			@IdRes int drawerId,
@@ -42,7 +43,7 @@ public class SetupDrawerToggleBehaviour extends SimpleBehaviour {
 	@Override
 	protected void onPostCreate(@NonNull AppCompatActivity activity, @Nullable Bundle instanceState) {
 		DrawerLayout drawerLayout = (DrawerLayout) activity.findViewById(drawerId);
-		ActionBarDrawerToggle drawerToggle =
+		drawerToggle =
 				new ActionBarDrawerToggle(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes);
 		drawerLayout.addDrawerListener(drawerToggle);
 		drawerToggle.syncState();
@@ -53,7 +54,11 @@ public class SetupDrawerToggleBehaviour extends SimpleBehaviour {
 		switch (item.getItemId()) {
 			case android.R.id.home:
 				DrawerLayout drawerLayout = (DrawerLayout) activity.findViewById(drawerId);
-				setDrawerOpen(drawerLayout, !isDrawerOpen(drawerLayout));
+				if(drawerToggle.isDrawerIndicatorEnabled()){
+					setDrawerOpen(drawerLayout, !isDrawerOpen(drawerLayout));
+				} else {
+					activity.onBackPressed();
+				}
 		}
 	}
 
@@ -67,5 +72,9 @@ public class SetupDrawerToggleBehaviour extends SimpleBehaviour {
 		} else {
 			drawerLayout.closeDrawer(drawerGravity);
 		}
+	}
+
+	public void showBackArrow(boolean showBackArrow){
+		drawerToggle.setDrawerIndicatorEnabled(!showBackArrow);
 	}
 }
