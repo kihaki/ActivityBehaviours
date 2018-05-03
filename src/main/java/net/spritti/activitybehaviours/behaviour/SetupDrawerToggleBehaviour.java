@@ -15,10 +15,13 @@ import net.spritti.activitybehaviours.base.SimpleBehaviour;
 
 public class SetupDrawerToggleBehaviour extends SimpleBehaviour {
 
-	@IdRes private final     int drawerId;
-	private final            int drawerGravity;
-	@StringRes private final int openDrawerContentDescRes;
-	@StringRes private final int closeDrawerContentDescRes;
+	@IdRes
+	private final int drawerId;
+	private final int drawerGravity;
+	@StringRes
+	private final int openDrawerContentDescRes;
+	@StringRes
+	private final int closeDrawerContentDescRes;
 	private ActionBarDrawerToggle drawerToggle;
 
 	SetupDrawerToggleBehaviour(
@@ -42,7 +45,7 @@ public class SetupDrawerToggleBehaviour extends SimpleBehaviour {
 
 	@Override
 	protected void onPostCreate(@NonNull AppCompatActivity activity, @Nullable Bundle instanceState) {
-		DrawerLayout drawerLayout = (DrawerLayout) activity.findViewById(drawerId);
+		DrawerLayout drawerLayout = activity.findViewById(drawerId);
 		drawerToggle =
 				new ActionBarDrawerToggle(activity, drawerLayout, openDrawerContentDescRes, closeDrawerContentDescRes);
 		drawerLayout.addDrawerListener(drawerToggle);
@@ -53,8 +56,8 @@ public class SetupDrawerToggleBehaviour extends SimpleBehaviour {
 	protected void onOptionsItemSelected(@NonNull AppCompatActivity activity, @NonNull MenuItem item) {
 		switch (item.getItemId()) {
 			case android.R.id.home:
-				DrawerLayout drawerLayout = (DrawerLayout) activity.findViewById(drawerId);
-				if(drawerToggle.isDrawerIndicatorEnabled()){
+				DrawerLayout drawerLayout = activity.findViewById(drawerId);
+				if (drawerToggle.isDrawerIndicatorEnabled()) {
 					setDrawerOpen(drawerLayout, !isDrawerOpen(drawerLayout));
 				} else {
 					activity.onBackPressed();
@@ -74,7 +77,7 @@ public class SetupDrawerToggleBehaviour extends SimpleBehaviour {
 		}
 	}
 
-	public void showBackArrow(boolean showBackArrow){
+	public void showBackArrow(boolean showBackArrow) {
 		drawerToggle.setDrawerIndicatorEnabled(!showBackArrow);
 	}
 }

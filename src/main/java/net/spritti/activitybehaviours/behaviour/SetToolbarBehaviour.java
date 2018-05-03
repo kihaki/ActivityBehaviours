@@ -34,7 +34,7 @@ public class SetToolbarBehaviour extends SimpleBehaviour {
 
 	@Override
 	protected void onPostCreate(@NonNull AppCompatActivity activity, @Nullable Bundle instanceState) {
-		Toolbar toolbar = (Toolbar) activity.findViewById(toolbarId);
+		Toolbar toolbar = activity.findViewById(toolbarId);
 		activity.setSupportActionBar(toolbar);
 		ActionBar actionBar = activity.getSupportActionBar();
 		if (actionBar != null) {
